@@ -1,9 +1,9 @@
 import sys
 from pathlib import Path
 
+
 def txt_importer(file_path):
     path = Path(file_path)
-    
     if not file_path.endswith(".txt"):
         sys.stderr.write("Formato inválido\n")
         return []
@@ -19,4 +19,3 @@ def txt_importer(file_path):
     except FileNotFoundError:
         sys.stderr.write(f"Arquivo {file_path} não encontrado\n")
         return []
-    
