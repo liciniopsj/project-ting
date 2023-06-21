@@ -1,12 +1,16 @@
+def instance_search(instance, item):
+    return instance.search(item)['linhas_do_arquivo']
+
+
 def exists_word(word, instance):
     found = []
 
     for item in range(len(instance)):
         occurrences = []
 
-        for line_index, line_content in enumerate(instance.search(item)['linhas_do_arquivo']):
-            if word.casefold() in line_content.casefold():
-                occurrences.append({'linha': line_index + 1})
+        for index, content in enumerate(instance_search(instance, item)):
+            if word.casefold() in content.casefold():
+                occurrences.append({'linha': index + 1})
 
         if occurrences:
             found.append({
@@ -24,9 +28,9 @@ def search_by_word(word, instance):
     for item in range(len(instance)):
         occurrences = []
 
-        for line_index, line_content in enumerate(instance.search(item)['linhas_do_arquivo']):
-            if word.casefold() in line_content.casefold():
-                occurrences.append({'linha': line_index + 1, 'conteudo': line_content})
+        for index, content in enumerate(instance_search(instance, item)):
+            if word.casefold() in content.casefold():
+                occurrences.append({'linha': index + 1, 'conteudo': content})
 
         if occurrences:
             results.append({
@@ -36,4 +40,3 @@ def search_by_word(word, instance):
             })
 
     return results
-
